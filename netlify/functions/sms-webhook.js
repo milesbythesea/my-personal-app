@@ -91,7 +91,7 @@ async function savePostToGitHub(post) {
 
   try {
     // 1. Get current file content
-    const getUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${FILE_PATH}?ref=dev`;
+    const getUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${FILE_PATH}?ref=main`;
     console.log('Fetching from URL:', getUrl);
     
     const getResponse = await fetch(getUrl, {
@@ -132,7 +132,7 @@ async function savePostToGitHub(post) {
         message: `Add new blog post: ${post.id}`,
         content: updatedContent,
         sha: fileData.sha,
-        branch: 'dev' // or 'main' depending on your branch
+        branch: 'main' // or 'main' depending on your branch
       })
     });
 
