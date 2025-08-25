@@ -41,7 +41,7 @@ function App() {
   return (
     <div className="App">
       <button className="home-button" onClick={() => setCurrentScreen('home')}>
-        <img src={process.env.PUBLIC_URL + '/home-icon.jpg'} alt="Home" className="home-icon" />
+        <img src={process.env.PUBLIC_URL + '/home-icon.jpg?v=2'} alt="Home" className="home-icon" />
       </button>
 
       <div className="content">{renderContent()}</div>
