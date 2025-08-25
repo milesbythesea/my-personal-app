@@ -1,6 +1,14 @@
 {
   "posts": [
     {
+      "id": "1756146672549",
+      "timestamp": "2025-08-25T18:31:12.549Z",
+      "content": "Hi",
+      "mediaUrl": null,
+      "mediaType": null,
+      "type": "text"
+    },
+    {
       "id": "1704038400000",
       "timestamp": "2024-01-01T00:00:00.000Z",
       "content": "Welcome to my SMS blog! This is the first post to test the system.",
@@ -9,7 +17,7 @@
       "mediaType": null
     },
     {
-      "id": "1704124800000", 
+      "id": "1704124800000",
       "timestamp": "2024-01-02T00:00:00.000Z",
       "content": "Testing with a link: https://example.com - pretty cool!",
       "type": "link",
@@ -17,5 +25,5 @@
       "mediaType": null
     }
   ],
-  "lastUpdated": "2024-01-02T00:00:00.000Z"
+  "lastUpdated": "2025-08-25T18:31:12.908Z"
 }
