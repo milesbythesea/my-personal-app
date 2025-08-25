@@ -76,14 +76,25 @@ async function savePostToGitHub(post) {
   const GITHUB_REPO = process.env.GITHUB_REPO; // e.g., "username/repo-name"
   const FILE_PATH = 'public/data/posts.json';
   
+  console.log('=== GitHub Debug Info ===');
+  console.log('GITHUB_TOKEN exists:', !!GITHUB_TOKEN);
+  console.log('GITHUB_TOKEN starts with ghp_:', GITHUB_TOKEN?.startsWith('ghp_'));
+  console.log('GITHUB_REPO:', GITHUB_REPO);
+  console.log('FILE_PATH:', FILE_PATH);
+  
   if (!GITHUB_TOKEN || !GITHUB_REPO) {
     console.error('GitHub credentials not configured');
+    console.error('GITHUB_TOKEN missing:', !GITHUB_TOKEN);
+    console.error('GITHUB_REPO missing:', !GITHUB_REPO);
     return;
   }
 
   try {
     // 1. Get current file content
-    const getResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${FILE_PATH}`, {
+    const getUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${FILE_PATH}?ref=dev`;
+    console.log('Fetching from URL:', getUrl);
+    
+    const getResponse = await fetch(getUrl, {
       headers: {
         'Authorization': `Bearer ${GITHUB_TOKEN}`,
         'Accept': 'application/vnd.github.v3+json',
@@ -91,8 +102,12 @@ async function savePostToGitHub(post) {
       }
     });
 
+    console.log('GitHub API Response:', getResponse.status, getResponse.statusText);
+    
     if (!getResponse.ok) {
-      throw new Error(`Failed to get file: ${getResponse.statusText}`);
+      const errorBody = await getResponse.text();
+      console.error('GitHub API Error Body:', errorBody);
+      throw new Error(`Failed to get file: ${getResponse.status} ${getResponse.statusText}`);
     }
 
     const fileData = await getResponse.json();
